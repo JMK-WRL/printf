@@ -12,7 +12,7 @@ int _print(const char *format, ...)
 {
 	va_list args;
 	int x, count = 0;
-	char z, *o;
+	char c, *s;
 
 	va_start(args, format);
 
