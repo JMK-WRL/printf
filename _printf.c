@@ -29,14 +29,18 @@ int _printf(const char *format, ...)
 	{
 	case 'c':
 		{
+
 		int val = va_arg(args, int);
+
 		putchar(val);
 		P_char++;
 		}
 		break;
 	case 's':
 		{
+
 		char *val = va_arg(args, char *);
+
 		P_char += printf("%s", val);
 		}
 		break;
