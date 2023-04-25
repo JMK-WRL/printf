@@ -2,8 +2,12 @@
 #define MAIN_H
 
 #include <stdarg.h>
+#include <stdio.h>
+#include <limits.h>
+#include <string.h>
+#include <stddef.h>
 
-int _print(const char *format, ...);
+int _printf(const char *format, ...);
 void _putchar(char c);
 int print_char(va_list args, char buffer[], int ibuf);
 int print_str(va_list args, char buffer[], int ibuf);

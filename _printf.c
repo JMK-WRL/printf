@@ -1,59 +1,66 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
- * _printf - The custom printing function
- * @format: The format string
- *
- * Return: The number of chracters that are printed.
+ * _printf - function that outputs a format
+ * @format: string character
+ * @...: arguments
+ * Return: format string
  */
 
-int _print(const char *format, ...)
+int _printf(const char *format, ...)
 {
-	va_list args;
-	int x, count = 0;
-	char c, *s;
+    va_list args;
+    int written;
+    char ch;
 
-	va_start(args, format);
+    va_start(args, format);
 
-	for (x = 0; format[x] != '\0'; x++)
-	{
-		if (format[x] != '%')
-		{
-			putchar(format[x]);
-			count++;
+    while ((ch = *format++) != '\0')
+    {
+        if (ch != '%')
+        {
+            putchar(ch);
+            written++;
+        }
+        else
+        {
+            ch = *format++;
+
+            
+	    switch (ch)
+            {
+            case 'c':
+                {
+                    int value = va_arg(args, int);
+                    putchar(value);
+                    written++;
+                }
+                break;
+            case 's':
+                {
+                    char *value = va_arg(args, char *);
+		    written += printf("%s", value);
 		}
-		else
-		{
-			switch (format[++x])
-			{
-				case 'c':
-					c = va_arg(args, int);
-					putchar(c);
-					count++;
-					break;
-				case 's':
-					s = va_arg(args, char *);
-					while (*s)
-					{
-						putchar(*s++);
-						count++;
-					}
-					break;
-				case '%':
-					putchar('%');
-					count++;
-					break;
-				default:
-					putchar('%');
-					putchar(format[x]);
-					count += 2;
-					break;
-			}
-		}
-	}
+                break;
+            case '%':
+                {
+                    putchar('%');
+  		    written++;
+                }
+                break;
+            default:
+                {
+                    putchar('%');
+                    putchar(ch);
+                    written += 2;
+                }
+                break;
+            }
+        }
+    }
 
-	va_end(args);
+    va_end(args);
 
-	return (count);
+    return written; 
 }
+
