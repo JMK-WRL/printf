@@ -1,56 +1,59 @@
 #include "main.h"
+#include <stdio.h>
 
 /**
- * _printf - Functions that output a given format.
- * @format: The character string
- * @...: arguments
- * Return: String character.
+ * _printf - The custom printing function
+ * @format: The format string
+ *
+ * Return: The number of chracters that are printed.
  */
 
-int _printf(const char *format, ...)
+int _print(const char *format, ...)
 {
 	va_list args;
-	int P_char;
-	char n;
+	int x, count = 0;
+	char z, *o;
 
 	va_start(args, format);
 
-	while ((n = *format++) != '\0')
+	for (x = 0; format[x] != '\0'; x++)
 	{
-		if (n != '%')
+		if (format[x] != '%')
 		{
-			putchar(n);
-			P_char++;
+			putchar(format[x]);
+			count++;
 		}
 		else
 		{
-			n = *format++;
-
-			switch (n)
+			switch (format[++x])
 			{
 				case 'c':
-					{
-						int val = va_arg(args, int);
-						putchar(val);
-						P_char++;
-					}
+					c = va_arg(args, int);
+					putchar(c);
+					count++;
 					break;
 				case 's':
+					s = va_arg(args, char *);
+					while (*s)
 					{
-						char *val = va_arg(args, char *);
-						P_char += printf("%s", val);
+						putchar(*s++);
+						count++;
 					}
 					break;
 				case '%':
-					{
-						putchar('%');
-						putchar(n);
-						P_char += 2;
-					}
+					putchar('%');
+					count++;
+					break;
+				default:
+					putchar('%');
+					putchar(format[x]);
+					count += 2;
 					break;
 			}
 		}
 	}
+
 	va_end(args);
-	return (P_char);
+
+	return count;
 }
