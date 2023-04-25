@@ -1,10 +1,9 @@
 #include "main.h"
 
 /**
- * _printf - Functions that outputs a given format. 
- * @format: character string
- * @...: arguments
- * Return: String character.
+ * _printf - The print function
+ * @format: The format
+ * Return: The printed chars.
  */
 
 int _printf(const char *format, ...)
