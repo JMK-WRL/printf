@@ -55,5 +55,5 @@ int _print(const char *format, ...)
 
 	va_end(args);
 
-	return count;
+	return (count);
 }
