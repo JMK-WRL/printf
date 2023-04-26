@@ -64,3 +64,39 @@ int _printf(const char *format, ...)
     return written; 
 }
 
+#include <stdio.h>
+#include <stdarg.h>
+
+int _printf(const char *format, ...)
+{
+	va_list arg;
+	int x = 0;
+
+	va_start(arg, format);
+
+	while (*format != '\0')
+	{
+		if(*format == '%')
+		{
+			format++;
+
+			if(*format == 'd' || *format == 'i')
+			{
+				int value = va_arg(arg, int);
+				printf("%d", value);
+				done++;
+			}
+		}
+		else
+		{
+			putchar(*format);
+			done++;
+		}
+		format++;
+	}
+
+	va_end(arg);
+
+	return(arg);
+}
+
